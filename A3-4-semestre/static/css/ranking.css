@@ -22,7 +22,7 @@ h1 {
   text-align: center;
 }
 
-/* Estilização da tabela do ranking */
+
 table {
   width: 80%;
   margin: 30px auto;
@@ -49,7 +49,7 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-/* Botões no rodapé */
+
 nav {
   position: fixed;
   bottom: 20px;
@@ -60,7 +60,7 @@ nav {
   gap: 20px;
 }
 
-/* Estilo dos links */
+
 nav a {
   padding: 12px 24px;
   background-color: #4caf50;
