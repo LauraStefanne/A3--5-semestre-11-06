@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esqueci a Senha</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/senha.css') }}">
+</head>
+<body>
+    <form class="login-container" method="POST" action="/senha">
+        <div class="container">
+            <h1>Recuperar Senha</h1>
+
+            <input type="email" name="email" placeholder="Email cadastrado" required>
+
+            <input type="password" name="nova_senha" placeholder="Nova senha" required>
+
+            <button type="submit">Alterar Senha</button>
+
+            <h2><a href="/login">Voltar para login</a></h2>
+        </div>
+    </form>
+</body>
+</html>

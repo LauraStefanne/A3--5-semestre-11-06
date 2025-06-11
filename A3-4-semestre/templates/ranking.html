@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Ranking do Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ranking.css') }}" />
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('jogo') }}">Voltar ao Quiz</a>
+        <a href="{{ url_for('logout') }}">Sair</a>
+    </nav>
+
+    <h1>Ranking dos Usuários</h1>
+
+    {% if ranking %}
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Posição</th>
+                <th>Nome</th>
+                <th>Pontuação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in ranking %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ usuario.nome }}</td>
+                <td>{{ usuario.pontos }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Nenhum resultado encontrado.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Security Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jogo.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loading.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nota.css') }}" />
+     <script type="module" src="{{ url_for('static', filename='js/quest.js') }}"></script>
+     <script type="module" src="{{ url_for('static', filename='js/loading.js') }}"></script>
+     <script type="module" src="{{ url_for('static', filename='js/ConfigNota.js') }}"></script>
+     <script type="module" src="{{ url_for('static', filename='js/QuizConfig.js') }}"></script>
+
+  </head>
+  <body>
+    <nav class="menu">
+      <div class="div-menu">
+        <ul>
+          <div class="bonus"><li>Bonus</li></div>
+          <div class="Nome">
+        <!-- Exibe o nome do usuário logado (se existir) -->
+        <p>{{ session['usuario'] if session.get('usuario') else 'Visitante' }}</p>
+      </div>
+          <div class="direita">
+            <div class="config-icon" onclick="toggleConfigMenu()">
+              <img
+                class="rotating-image"
+                src="{{ url_for('static', filename='img/gear-fill.svg') }}" 
+                alt="gear" 
+
+              />
+            </div>
+
+            <div class="config-box" id="configBox">
+              <h1>Configurações</h1>
+              <div class="config-fonte">
+                <button onclick="DiminuirFontSize()" class="esquerda"><</button>
+                <p class="fonte">||||||</p>
+                <button onclick="AumentarFontSize()" class="direita">></button>
+              </div>
+
+              <button onclick="toggleConfigMenu()">Fechar</button>
+            </div>
+
+            <!-- <li class="engrenagem"><img width="25px" src="/icon/gear-fill.svg" alt="gear.svg" ></li> -->
+            <img
+              class="fullscreen"
+              width="20px"
+              src="{{ url_for('static', filename='img/arrows-fullscreen.svg') }}" 
+              alt="arrows.svg"
+            />
+            <!--Pode ser um botao para deixar em fullscreen "f11"-->
+          </div>
+        </ul>
+      </div>
+    </nav>
+    <main>
+
+
+            <div id="loader">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+      </div>
+
+      <!-- Modal da nota -->
+      <div id="nota" class="modal">
+        <div class="modal-content">
+          <h2>🔒 Bem-vindo ao Quiz de Cibersegurança!</h2>
+          <p>📌 Informações importantes:</p>
+          <div class="alinhar">
+            <li>
+              📌 Este quiz foi criado para
+              <strong>&nbsp;todas as idades e públicos</strong>.
+            </li>
+            <li>
+              📌 É educativo e tem como objetivo
+              <strong
+                >&nbsp;promover a conscientização sobre segurança
+                digital</strong
+              >.
+            </li>
+            <li>
+              📌 Responda com atenção e divirta-se aprendendo como
+              <strong>&nbsp;manter seus dados seguros na internet</strong>.
+            </li>
+            <li>
+              📌 Você vai aprender sobre
+              <strong
+                >&nbsp;proteção de senhas, privacidade online, golpes virtuais e
+                muito mais</strong
+              >.
+            </li>
+          </div>
+          <button id="fecharNota">Começar o Quiz</button>
+        </div>
+      </div>
+      
+      <!--- <div class="dificuldade">
+        <h2>Escolha a Dificuldade</h2>
+        <div class="dificuldade-opcoes">
+          <button id="facil" onclick="ModoNormal()">Fácil</button>
+          <button id="medio">Médio</button>
+          <button id="dificil">Difícil</button>
+        </div>
+       </div> -->
+    <main class="main-container" id="quiz-container"> 
+    <div class="main">
+      <div class="titulo">
+        <h1>Quiz de Cibersegurança</h1>
+        <p>Teste seus conhecimentos sobre segurança digital!</p>
+      </div>
+
+      <div class="contador">
+        <p id="timer">00:00</p>
+        
+      </div>
+
+      <div class="quantidade">
+        <p id="questao">Questão: 1/13</p>
+        <p id="acertos">Acertos: 0</p>
+        <p id="erros">Erros: 0</p>  
+      </div>
+
+      <div>
+        <p id="dificuldade">Dificuldade: Fácil</p>
+        <!-- A dificuldade pode ser puxada do banco de dados, caso o usuario tenha feito o cadastro -->
+      </div>
+      <div class="perguntas" id="quest">
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo
+          voluptatibus nihil doloribus beatae fugiat dolores vitae, incidunt
+          nulla? Consequatur animi repellendus cupiditate tempore voluptatibus
+          voluptatum earum delectus omnis ducimus minus.
+        </p>
+      </div>
+      <!-- As perguntas podem ser puxadas de um servidor API,junto com as responstas.-->
+
+      <div class="respostas">
+        <!-- 4 botoes interativos, provavelmente tera um numero encima do botao, quando a pessoa aperta o botao vai selecionar a resposta: ex:> <button> China </button> dentro do campo do botao tera um numero -->
+        <button id="a"></button>
+        <button id="b"></button>
+        <button id="c"></button>
+        <button id="d"></button>
+      </div>
+      </div>
+    </main>
+    
+
+ <!-- Resultado (inicialmente escondido) -->
+      <div class="main-container" id="resultado-container" style="display:none;">
+        <div class="resultado-content">
+          <h2>Resultado do Quiz</h2>
+          <p id="resultado-texto"></p>
+          <p id="acertos-final">Acertos: 0</p>
+          <p id="erros-final">Erros: 0</p>
+          <button id="reiniciar-quiz" onclick="reiniciarQuiz()">Reiniciar Quiz</button>
+          <button id="sair-quiz" onclick="sairQuiz()">Sair do Quiz</button>
+          <button id="ver-ranking" onclick="verRanking()">Ver Ranking</button>
+           <p id="mensagem-ranking"></p>
+        </div>
+        <div>
+
+  </body>
+</html>
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Cyber Security</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  </head>
+  <body>
+    <main>
+      <div class="login-container">
+        <h1>Cyber Security</h1>
+        <div>
+          <a href="{{ url_for('jogo') }}">
+            <button type="button">Jogar</button>
+          </a>
+
+          <a href="/cadastro">Cadastro</a>
+          <a href="/login">Login</a> 
+            <a href="/deslogar">Deslogar</a>     
+            <a href="/ranking">Ranking</a>    
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
