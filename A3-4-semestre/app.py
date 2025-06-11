@@ -45,7 +45,7 @@ def cadastro():
                 usuario_existente_email = email_cursor.fetchone()
                 email_cursor.close()
                 if usuario_existente_email:
-                    # Mostra a mensagem de erro no mensagem.html
+                
                     return render_template(
                         'mensagemcadastro.html',
                         titulo='Erro no Cadastro',
@@ -58,7 +58,7 @@ def cadastro():
                 usuario_existente_nome = nome_cursor.fetchone()
                 nome_cursor.close()
                 if usuario_existente_nome:
-                    #Mostra a mensagem de erro no mensagem.html
+         
                     return render_template(
                         'mensagemcadastro.html',
                         titulo='Erro no Cadastro',
@@ -124,7 +124,7 @@ def login():
 # página do jogo
 @app.route('/jogo')
 def jogo():
-    print(f"Conteúdo da sessão ao carregar jogo.html: {session}") # Esta linha é a chave!
+    print(f"Conteúdo da sessão ao carregar jogo.html: {session}")
     return render_template('jogo.html', session=session)
 
 # Esqueci a senha
@@ -177,10 +177,10 @@ def salvar_pontuacao():
         try:
             cursor = conn.cursor()
 
-            # Tenta atualizar a pontuação do usuário
+            #  atualiza a pontuação do usuário
             cursor.execute("UPDATE ranking SET pontos = %s WHERE nome = %s", (pontos, nome_usuario))
 
-            # Se nenhuma linha foi afetada, insere novo registro
+            # insere novo registro
             if cursor.rowcount == 0:
                 cursor.execute("INSERT INTO ranking (nome, pontos) VALUES (%s, %s)", (nome_usuario, pontos))
 
